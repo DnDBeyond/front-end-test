@@ -1,0 +1,84 @@
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle, #1a1d1f 0%, #000000 120%);
+  /* Asegura que ocupe toda la altura de la ventana */
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url('./assets/talent-calc-bg.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 0.25rem 0 rgba(110, 171, 234, 0.2);
+  border: 1px solid #141519;
+  min-width: 50%;
+  min-height: 30%;
+  gap: 50px;
+
+}
+
+.title {
+  font-size: 20px;
+  width: 100%;
+  color: white;
+  margin-bottom: 20px;
+  background-color: #1a1c1e;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.talent-path-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.talent-path-label {
+  font-size: 10px;
+  color: white;
+  text-align: center;
+  margin-right: 30px;
+  white-space: nowrap;
+
+}
+
+.points-spent {
+  font-size: 16px;
+  color: white;
+  background-color: #08090b;
+  box-shadow: 0 0 0.25rem 0 rgba(110, 171, 234, 0.2);
+  border: 1px solid #141519;
+  text-align: center;
+  padding: 15px 10px;
+
+  span {
+    color: #455f7a;
+  }
+
+}
+
+
+.talent-calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
+
+}
+
+.talent-calculator-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
