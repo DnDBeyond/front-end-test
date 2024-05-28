@@ -1,26 +1,51 @@
-import { useState } from "react";
-import "./App.scss";
+import { useState, useEffect } from "react";
 import TalentPath from "./components/TalentPath";
-import { MAX_POINTS } from "./constants";
+import "./App.scss";
 
 const App = () => {
-  const [pointsSpent, setPointsSpent] = useState(0);
-  const [path1, setPath1] = useState([false, false, false, false]);
-  const [path2, setPath2] = useState([false, false, false, false]);
+  const [paths, setPaths] = useState([]);
+  const [maxPoints, setMaxPoints] = useState(0);
+  const [totalPointsSpent, setTotalPointsSpent] = useState(0);
 
-  const handlePointChange = (path, setPath, index, increment) => {
-    if (increment && pointsSpent < MAX_POINTS) {
-      if (!path[index] && (index === 0 || path[index - 1])) {
-        path[index] = true;
-        setPointsSpent(pointsSpent + 1);
-      }
-    } else if (!increment && pointsSpent > 0) {
-      if (path[index] && (index === path.length - 1 || !path[index + 1])) {
-        path[index] = false;
-        setPointsSpent(pointsSpent - 1);
-      }
+  useEffect(() => {
+    // Simulating an HTTP call to fetch data from the JSON file
+    import("./data/index.json").then((data) => {
+      // Create initial array based on availableSkills and pointsSpent values
+      const updatedPaths = data.paths.map((path) => {
+        const initialPoints = Array.from(
+          { length: path.availableSkills },
+          (_, index) => index < path.pointsSpent
+        );
+        return { ...path, points: initialPoints };
+      });
+      setPaths(updatedPaths);
+      setMaxPoints(data.maxPoints);
+      setTotalPointsSpent(
+        updatedPaths.reduce((total, path) => total + path.pointsSpent, 0)
+      );
+    });
+  }, []);
+
+  const handlePointChange = (pathIndex, pointIndex, increment) => {
+    if (increment && totalPointsSpent >= maxPoints) {
+      return;
     }
-    setPath([...path]);
+    setPaths((prevPaths) => {
+      const updatedPaths = [...prevPaths];
+      const currentPath = updatedPaths[pathIndex];
+      const newTotalPointsSpent = totalPointsSpent + (increment ? 1 : -1);
+      if (
+        (pointIndex === 0 || currentPath.points[pointIndex - 1]) &&
+        !currentPath.points[pointIndex + 1] &&
+        currentPath.points[pointIndex] !== increment
+      ) {
+        currentPath.points[pointIndex] = increment;
+        currentPath.pointsSpent += increment ? 1 : -1;
+        setTotalPointsSpent(newTotalPointsSpent);
+      }
+      updatedPaths[pathIndex] = currentPath;
+      return updatedPaths;
+    });
   };
 
   return (
@@ -31,35 +56,26 @@ const App = () => {
         </div>
         <div className="talent-calculator-container">
           <div className="talent-calculator">
-            <div className="talent-path-container">
-              <div className="talent-path-label">TALENT PATH 1</div>
-              <TalentPath
-                pathIndex={0}
-                path={path1}
-                onPointChange={(index, increment) =>
-                  handlePointChange(path1, setPath1, index, increment)
-                }
-                maxPointsReached={pointsSpent >= MAX_POINTS}
-              />
-            </div>
-            <div className="talent-path-container">
-              <div className="talent-path-label">TALENT PATH 2</div>
-              <TalentPath
-                pathIndex={1}
-                path={path2}
-                onPointChange={(index, increment) =>
-                  handlePointChange(path2, setPath2, index, increment)
-                }
-                maxPointsReached={pointsSpent >= MAX_POINTS}
-              />
-            </div>
+            {paths.map((path, index) => (
+              <div key={index} className="talent-path-container">
+                <div className="talent-path-label">{path.title}</div>
+                <TalentPath
+                  pathIndex={index}
+                  path={path.points}
+                  onPointChange={(pointIndex, increment) =>
+                    handlePointChange(index, pointIndex, increment)
+                  }
+                  maxPointsReached={totalPointsSpent >= maxPoints}
+                />
+              </div>
+            ))}
           </div>
           <div
             className={`points-spent ${
-              pointsSpent === MAX_POINTS ? "max-points" : ""
+              totalPointsSpent === maxPoints ? "max-points" : ""
             }`}
           >
-            {pointsSpent} / {MAX_POINTS}
+            {totalPointsSpent} / {maxPoints}
             <br />
             <span>Points Spent</span>
           </div>

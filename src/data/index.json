@@ -1,0 +1,15 @@
+{
+  "paths": [
+    {
+      "title": "TALENT PATH 1",
+      "availableSkills": 4,
+      "pointsSpent": 0
+    },
+    {
+      "title": "TALENT PATH 2",
+      "availableSkills": 4,
+      "pointsSpent": 2
+    }
+  ],
+  "maxPoints": 6
+}
