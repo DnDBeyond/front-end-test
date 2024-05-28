@@ -1,0 +1,130 @@
+//eslint-disable
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle, #1a1d1f 0%, #000000 120%);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url('./assets/talent-calc-bg.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 0.25rem 0 rgba(110, 171, 234, 0.2);
+  border: 1px solid #141519;
+  height: 30%;
+  max-width: 800px;
+  min-width: 800px;
+  gap: 50px;
+}
+
+.title {
+  font-size: 1.5rem;
+  width: 100%;
+  color: white;
+  margin-bottom: 20px;
+  background-color: #1a1c1e;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.talent-path-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.talent-path-label {
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+  margin-right: 30px;
+  white-space: nowrap;
+}
+
+.points-spent {
+  font-size: 1.2rem;
+  color: white;
+  background-color: #08090b;
+  box-shadow: 0 0 0.25rem 0 rgba(110, 171, 234, 0.2);
+  border: 1px solid #141519;
+  text-align: center;
+  padding: 15px 10px;
+  margin-right: 30px;
+  
+  &.max-points {
+      color: red;
+  }
+  span {
+    color: #455f7a;
+  }
+}
+
+.talent-calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.talent-calculator-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .main-container {
+    box-shadow: 0 0 0.25rem 0 rgba(110, 171, 234, 0.2);
+    border: 1px solid #141519;
+    width: auto;
+    height: 100%;
+    min-width: min-content;
+    min-height: min-content;
+  }
+
+  .talent-calculator {
+    flex-direction: row;
+  }
+
+  .talent-calculator-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .talent-path-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .points-spent {
+    margin: 50px 0 0;
+    align-self: center;
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .talent-path-label {
+    margin-right: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  
+  }
+  .title {
+    margin-top: 30px;
+    width: auto;
+    word-wrap: break-word;
+    font-size: 2rem;
+    text-align: center;
+  }
+}

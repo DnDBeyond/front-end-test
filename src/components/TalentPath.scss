@@ -1,0 +1,89 @@
+$border-blue: #6eabea;
+$global-transition: all 0.2s ease-in-out;
+$icon-offset: 50px;
+
+.talent-path {
+    display: flex;
+    width: 100%;
+    gap: 70px;
+    position: relative;
+    &.max-points-reached {
+        .talent {
+            &:hover {
+                background-position-y: 0.925rem;
+                &:not(.active) {
+                    border-color: red;
+                }
+            }
+        }
+    }
+
+    .talent {
+        border: 5px solid #4f4f4e;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+        background-image: url('../assets/talent-icons-sprite.png');
+        width: $icon-offset;
+        height: $icon-offset;
+        background-position-y: $icon-offset;
+        transition: $global-transition;
+
+        &:hover {
+            background-position-y: 0px;
+            transition: none;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 110%;
+            width: 150%;
+            height: 10px;
+            background-color: #1b1d1e;
+            transform: translateY(-50%);
+            transition: background-color $global-transition;
+        }
+
+        &:last-child::before {
+            display: none;
+        }
+
+        &.active {
+            border-image: linear-gradient(to bottom, $border-blue 0%, $border-blue 55%, #424447 55%, $border-blue 100%);
+            border-image-slice: 1;
+
+            &::before {
+                background-color: lighten(#1b1d1e, 20%);
+            }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                background-position-y: 0px;
+            transition: $global-transition,
+            box-shadow 0s ease-in-out;
+        }
+
+        &:not(.active) {
+            transition: $global-transition, box-shadow 0s ease-in-out;
+        }
+    }
+}
+@media (max-width: 800px) {
+    .talent-path {
+        flex-direction: column;
+        gap: 70px;
+        align-items: center;
+        .talent{
+            border: 7px solid #4f4f4e;
+
+            &::before {
+                left: 50%;
+                top: 114%;
+                width: 14px;
+                height: 150%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
