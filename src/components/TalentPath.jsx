@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { MAX_POINTS } from "../constants";
 import { getIconPosition } from "../helpers";
 import "./TalentPath.scss";
 
