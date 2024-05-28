@@ -2,9 +2,11 @@
 import { getIconPosition } from "../helpers";
 import "./TalentPath.scss";
 
-const TalentPath = ({ pathIndex, path, onPointChange }) => {
+const TalentPath = ({ pathIndex, path,maxPointsReached, onPointChange }) => {
   return (
-    <div className="talent-path">
+    <div
+      className={`talent-path ${maxPointsReached ? "max-points-reached" : ""}`}
+    >
       {path.map((point, index) => (
         <div
           key={index}

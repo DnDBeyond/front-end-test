@@ -39,6 +39,7 @@ const App = () => {
                 onPointChange={(index, increment) =>
                   handlePointChange(path1, setPath1, index, increment)
                 }
+                maxPointsReached={pointsSpent >= MAX_POINTS}
               />
             </div>
             <div className="talent-path-container">
@@ -49,10 +50,15 @@ const App = () => {
                 onPointChange={(index, increment) =>
                   handlePointChange(path2, setPath2, index, increment)
                 }
+                maxPointsReached={pointsSpent >= MAX_POINTS}
               />
             </div>
           </div>
-          <div className="points-spent">
+          <div
+            className={`points-spent ${
+              pointsSpent === MAX_POINTS ? "max-points" : ""
+            }`}
+          >
             {pointsSpent} / {MAX_POINTS}
             <br />
             <span>Points Spent</span>
