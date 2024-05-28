@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./App.scss";
 import TalentPath from "./components/TalentPath";
-
-const MAX_POINTS = 6;
+import { MAX_POINTS } from "./constants";
 
 const App = () => {
   const [pointsSpent, setPointsSpent] = useState(0);
